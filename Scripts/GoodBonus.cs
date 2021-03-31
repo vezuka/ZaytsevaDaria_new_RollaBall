@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 namespace RollaBall
 {
@@ -9,6 +11,8 @@ namespace RollaBall
 
         private DisplayBonuses _displayBonuses;
 
+        public event Action PlayerCollect;
+
         private void Awake()
         {
             _material = GetComponent<Renderer>().material;
@@ -18,6 +22,7 @@ namespace RollaBall
         }
         protected override void Interaction()
         {
+            PlayerCollect?.Invoke();
             _displayBonuses.Display(5);
         }
 
